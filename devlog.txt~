@@ -1,0 +1,72 @@
+DESIGN DOC
+
+Team: Used Lancer Evo
+
+topaG -- 2016-12-05 5:00 PM
+- Created Devlog
+- Tested Dark Sky API
+
+lamE -- 2016-12-05 5:40 PM
+- Changed up a couple pages in the design document.
+- Began work on the frontend for the HTML layout.
+
+topaG -- 2016-12-06 4:30 PM
+- Tested google geocoder api
+
+malickS -- 2016-12-06
+- Sucessfully created news data puller
+
+lamE -- 2016-12-06 7:30 PM
+- Made the base.html page compatible with this project.
+
+malickS -- 2016-12-07
+- Expapnded newsUtils.py, made a list of possible sources and a function that allows you to get the latest 10 articles by source.
+
+malickS -- 2016-12-07
+- Changed function to let you choose if you want top, popular, or latest.
+
+zhangH -- 2016-12-07 2:04 AM
+- Created utils folder
+- Moved getWeather function to utils
+- Fixed redirect on root
+
+lamE -- 2016-12-07 9:04 PM
+- Created static and templates to move respective CSS and templates in.
+- Added basic functions to app.py and newsUtils.py to get the index.html News site running.
+- Configured index.html to list news articles and their images. Basic functionality with news site achieved.
+
+m alickS -- 2016-12-08
+-Added NYTimes API as backup for when newsapi goes down
+
+zhangH -- 2016-12-09 (a little past midnight)
+- Merged /weather progress to master
+- Added fixes for user inputs and location choice
+
+zhangH -- 2016-12-09 2:07 PM
+- Got session working
+- Got address to coords working 
+- Fed weather data to template
+
+lamE -- 2016-12-10 5:31 PM
+- Weather.html and weatheraddress.html files redone due to being overwritten by commit. Improvements made. Weatheraddress.html gives address submissions to be processed and displayed accordingly on weather.html.
+- Changed some aesthetic things on INDEX.
+- Began work on the secondary CSS file.
+
+lamE -- 2016-12-10 7:43 PM
+- Optimized collection and distribution of data for the current day + 7 days while working with Henry
+- Corrected variables and put up more information for the current day's weather.
+
+zhangH -- 2016-12-11 8:20 PM
+- Sent current variable to render template in weather route
+- Fixed errors on displaying it
+
+lamE -- 2016-12-11 10:30 PM
+- Added icons for respective weather.
+- Weather.html basic functions finished.
+
+zhangH -- 2016-12-12 1:36 PM
+- Added autocomplete for address with google places api
+
+lamE -- 2016-12-13 10:30
+- Did some CSS and added a fixed navbar on top of the page, panel colors, image size limits, and more.
+- Reworked the layout of the news page.
