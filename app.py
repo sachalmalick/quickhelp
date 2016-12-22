@@ -1,5 +1,5 @@
 from flask import Flask, session, render_template, redirect, url_for, request
-import urllib2, json, requests, os, datetime
+import urllib2, json, os, datetime
 from utils.newsUtils import samplenews, sources
 from utils.weatherUtils import getWeather, adrToCoords
 
@@ -10,6 +10,11 @@ app.secret_key=os.urandom(32)
 def root():
     return redirect(url_for("news"))
 
+@app.route("/clearweather")
+def clearweather():
+    session.clear()
+    return redirect(url_for("weather"))
+
 @app.route("/weather")
 def weather():
     if "lat" in session:
@@ -17,17 +22,50 @@ def weather():
         for day in p["daily"]["data"]:
             day["time"]=datetime.datetime.fromtimestamp(int(day["time"])).strftime('%Y-%m-%d')
         curr=p["daily"]["data"].pop(0)
-        print p["daily"]["data"]
-        return render_template("weather.html", current=curr, weatherContent=p["daily"]["data"])
+        return render_template("weather.html", current=curr, weatherContent=p["daily"]["data"], weatheractive="active", navcolor= "#8e44ad")
                 #return render_template('weather.html', adrForm="weatherContent=wc")
     else:
-        return render_template("weatheraddress.html")
+        return render_template("weatheraddress.html", weatheractive="active", navcolor= "#8e44ad")
 
 @app.route("/submitAddress", methods=['POST'])
 def submitAddress():
+    if request.form['address']=='':
+        return render_template("weatheraddress.html", error=
+                               '''
+                               <div class="row">
+                               <div class="container-fluid">
+                               <div class="col-sm-3">
+                               </div>
+                               <div class="col-sm-6">
+                               <div class="alert alert-danger">
+                               <center><strong>Error!</strong> Invalid Address!</center>
+                               </div>
+                               </div>
+                               <div class="col-sm-3">
+                               </div>
+                               </div>
+                               </div>
+                               '''
+                               , weatheractive="active", navcolor= "#8e44ad")
     adr=adrToCoords(request.form['address'])
     if adr=="Error":
-        return render_template("weatheraddress.html", error="Invalid Address")
+        return render_template("weatheraddress.html", error=
+                               '''
+                               <div class="row">
+                               <div class="container-fluid">
+                               <div class="col-sm-3">
+                               </div>
+                               <div class="col-sm-6">
+                               <div class="alert alert-danger">
+                               <center><strong>Error!</strong> Invalid Address!</center>
+                               </div>
+                               </div>
+                               <div class="col-sm-3">
+                               </div>
+                               </div>
+                               </div>
+                               '''
+                               , weatheractive="active", navcolor= "#8e44ad")
     session['lat']=adr['lat']
     session['lng']=adr['lng']
     return redirect(url_for("weather"))
@@ -35,7 +73,7 @@ def submitAddress():
 @app.route("/news")
 def news():
     dic = samplenews(66,'latest')
-    return render_template("index.html", newsactive="active", news=dic)
+    return render_template("index.html", newsactive="active", news=dic, navcolor="#16a085")
     return 'hi'
 
 @app.route("/test1")

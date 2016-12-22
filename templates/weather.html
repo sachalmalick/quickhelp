@@ -16,8 +16,10 @@
 	<div class="panel-heading">
 	  <center>
 	    <h2>Today's Weather for:</h2>
-	    <br>
 	    <h2>{{ current["time"] }}</h2>
+	    <form role="form" action="/clearweather">
+              <input class="form-control" type="submit" name="Submit!" value="Change Address Here!">
+            </form>
 	  </center>
 	</div>
 	<div class="panel-body panel-back">
@@ -25,6 +27,7 @@
 	    <img class="center-block img-responsive" src='static/{{ current["icon"] }}.png'>
 	    <hr>
 	    <br>
+
 	    <h4><b>High: <i>{{ current["temperatureMax"] }} F</i></b></h4>
 	    <br>
 	    <h4><b>Low: <i>{{ current["temperatureMin"] }} F</i></b></h4>
